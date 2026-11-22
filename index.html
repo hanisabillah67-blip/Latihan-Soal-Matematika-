@@ -1143,6 +1143,13 @@
       copyTextToClipboard(lines, "teacherStatus", `${rows.length} baris rekap tersalin (TSV). Tempel langsung ke Canva Sheets.`);
     }
 
+    const DEFAULT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz34WtnQEbG-1wKK5IED1FnIubtEP5alvk2OsJoPJXWxpKd9iY2NWhf3VqESaPmmHpBiw/exec";
+
+    function getActiveWebhookUrl() {
+      const saved = (localStorage.getItem(WEBHOOK_KEY) || "").trim();
+      return saved || DEFAULT_WEBHOOK_URL.trim();
+    }
+
     function toggleTeacherMode() {
       const pin = prompt("Masukkan PIN Mode Guru:");
       if (pin === null) return;
@@ -1154,7 +1161,7 @@
       document.getElementById("examSection").classList.add("hidden");
       document.getElementById("resultSection").classList.add("hidden");
       document.getElementById("teacherSection").classList.remove("hidden");
-      document.getElementById("webhookUrlInput").value = localStorage.getItem(WEBHOOK_KEY) || "";
+      document.getElementById("webhookUrlInput").value = getActiveWebhookUrl();
       renderTeacherTable();
     }
 
@@ -1206,18 +1213,19 @@
     }
 
     function sendToWebhookIfConfigured(record) {
-      const url = (localStorage.getItem(WEBHOOK_KEY) || "").trim();
+      const url = getActiveWebhookUrl();
       if (!url) return;
       fetch(url, {
         method: "POST",
         mode: "no-cors",
+        keepalive: true,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(record)
       }).catch(() => {});
     }
 
     function testWebhook() {
-      const url = document.getElementById("webhookUrlInput").value.trim();
+      const url = (document.getElementById("webhookUrlInput").value || "").trim() || getActiveWebhookUrl();
       if (!url) {
         alert("Isi URL Webhook terlebih dahulu.");
         return;
