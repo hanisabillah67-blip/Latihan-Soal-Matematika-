@@ -105,6 +105,16 @@
       background: var(--danger);
       color: #fff;
     }
+    .btn-doubt {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #f59e0b;
+    }
+    .btn-doubt.active {
+      background: #f59e0b;
+      color: #fff;
+      border-color: #d97706;
+    }
     .container {
       max-width: 920px;
       margin: 22px auto;
@@ -151,7 +161,27 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      margin-bottom: 12px;
+    }
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
       margin-bottom: 16px;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+      display: inline-block;
     }
     .q-pill {
       width: 38px;
@@ -163,19 +193,21 @@
       font-weight: 700;
       padding: 0;
     }
-    .q-pill.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
     .q-pill.answered {
       background: #dbeafe;
       border-color: #60a5fa;
       color: #1e3a8a;
     }
-    .q-pill.active.answered {
+    .q-pill.doubt {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .q-pill.active {
       background: var(--primary);
       color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.25);
     }
     .q-meta {
       display: flex;
@@ -261,18 +293,34 @@
       border-top: 1px solid var(--border);
       flex-wrap: wrap;
     }
-    .score-box {
-      text-align: center;
-      padding: 18px;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 12px;
-      margin-bottom: 18px;
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
     }
-    .score-num {
-      font-size: 2.3rem;
+    .summary-box {
+      text-align: center;
+      padding: 16px 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .summary-box.highlight {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+    .summary-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .summary-val {
+      font-size: 1.65rem;
       font-weight: 800;
       color: var(--primary);
+      margin-top: 4px;
     }
     .review-item {
       border: 1px solid var(--border);
@@ -342,7 +390,7 @@
       <div class="form-grid">
         <div>
           <label for="studentName">Nama Lengkap *</label>
-          <input id="studentName" type="text" placeholder="Contoh: Hani Sabillah" />
+          <input id="studentName" type="text" placeholder="Contoh: Lintang Ariyani" />
         </div>
         <div>
           <label for="studentClass">Kelas *</label>
@@ -362,6 +410,12 @@
     <!-- HALAMAN UJIAN -->
     <section id="examSection" class="card hidden">
       <div id="questionNav" class="q-nav"></div>
+      <div class="legend-row">
+        <span class="legend-item"><span class="legend-dot" style="background:#fff;"></span>Belum dijawab</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#dbeafe;border-color:#60a5fa;"></span>Terjawab</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#fef3c7;border-color:#f59e0b;"></span>Ragu-ragu</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#1e40af;border-color:#1e40af;"></span>Aktif</span>
+      </div>
       <div class="q-meta">
         <span id="qTopic"></span>
         <span id="qProgress"></span>
@@ -369,31 +423,34 @@
       <div id="questionText" class="q-text"></div>
       <div id="questionBody"></div>
       <div class="q-footer">
-        <div style="display:flex;gap:10px;">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <button id="btnPrev" type="button" class="btn-light" onclick="prevQuestion()">Sebelumnya</button>
+          <button id="btnDoubt" type="button" class="btn-doubt" onclick="toggleDoubt()">Ragu-ragu</button>
           <button id="btnNext" type="button" class="btn-light" onclick="nextQuestion()">Berikutnya</button>
         </div>
         <button id="btnFinish" type="button" class="btn-success" onclick="confirmFinishExam()">Selesai &amp; Kirim Jawaban</button>
       </div>
     </section>
 
-    <!-- HALAMAN HASIL -->
+    <!-- HALAMAN HASIL (HANYA NILAI, WAKTU, SOAL TERJAWAB, DAN PEMBAHASAN) -->
     <section id="resultSection" class="card hidden">
       <h2 style="margin-top:0;">Hasil Ujian</h2>
-      <p id="resultStudentInfo" style="color:var(--muted);margin-top:0;"></p>
-      <div class="score-box">
-        <div style="font-size:0.9rem;color:var(--muted);font-weight:600;">NILAI AKHIR</div>
-        <div id="finalScore" class="score-num">0</div>
-        <div id="scoreDetail" style="font-size:0.9rem;color:var(--text);margin-top:4px;"></div>
+      <div class="summary-grid">
+        <div class="summary-box highlight">
+          <div class="summary-label">Nilai</div>
+          <div id="finalScore" class="summary-val">0</div>
+        </div>
+        <div class="summary-box">
+          <div class="summary-label">Waktu</div>
+          <div id="resultTime" class="summary-val">00:00:00</div>
+        </div>
+        <div class="summary-box">
+          <div class="summary-label">Soal Terjawab</div>
+          <div id="resultAnswered" class="summary-val">0/10</div>
+        </div>
       </div>
 
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
-        <button type="button" class="btn-primary" onclick="copySingleResultTSV()">1-Click Copy Hasil (Canva Sheets)</button>
-        <button type="button" class="btn-light" onclick="resetToLogin()">Kembali ke Halaman Awal</button>
-      </div>
-      <div id="studentExportStatus" class="status-msg"></div>
-
-      <h3 style="margin-top:22px;">Pembahasan Singkat</h3>
+      <h3 style="margin-top:8px;">Pembahasan</h3>
       <div id="reviewContainer"></div>
     </section>
 
@@ -498,8 +555,8 @@
         type: "mc",
         text: "Dua buah dadu dilempar undi bersamaan satu kali. Peluang muncul mata dadu berjumlah 9 adalah...",
         options: ["1/12", "1/9", "1/6", "4/9", "5/18"],
-        answer: 0,
-        explanation: "Ruang sampel n(S) = 36. Pasangan berjumlah 9: (3,6), (4,5), (5,4), (6,3) -> 4 kejadian. Peluang = 4/36 = 1/9? Periksa: 4/36 = 1/9 (pilihan B). Koreksi kunci: indeks 1 adalah 1/9."
+        answer: 1,
+        explanation: "Ruang sampel n(S) = 36. Pasangan berjumlah 9: (3,6), (4,5), (5,4), (6,3) -> 4 kejadian. Peluang = 4/36 = 1/9."
       },
       {
         id: "S7",
@@ -543,10 +600,9 @@
       }
     ];
 
-    QUESTIONS[5].answer = 1;
-
     let currentIdx = 0;
     let userAnswers = {};
+    let doubtFlags = {};
     let remainingSec = EXAM_DURATION_SEC;
     let timerInterval = null;
     let startTimeMs = 0;
@@ -575,6 +631,7 @@
       studentInfo = { name, cls, absen };
       currentIdx = 0;
       userAnswers = {};
+      doubtFlags = {};
       remainingSec = EXAM_DURATION_SEC;
       startTimeMs = Date.now();
 
@@ -615,6 +672,20 @@
       return false;
     }
 
+    function toggleDoubt() {
+      const q = QUESTIONS[currentIdx];
+      doubtFlags[q.id] = !doubtFlags[q.id];
+      renderQuestion();
+    }
+
+    function updateDoubtButton() {
+      const q = QUESTIONS[currentIdx];
+      const btnDoubt = document.getElementById("btnDoubt");
+      const isDoubt = Boolean(doubtFlags[q.id]);
+      btnDoubt.classList.toggle("active", isDoubt);
+      btnDoubt.textContent = isDoubt ? "Ditandai Ragu-ragu" : "Ragu-ragu";
+    }
+
     function renderNav() {
       const nav = document.getElementById("questionNav");
       nav.innerHTML = "";
@@ -622,8 +693,9 @@
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "q-pill";
-        if (idx === currentIdx) btn.classList.add("active");
         if (isAnswered(q)) btn.classList.add("answered");
+        if (doubtFlags[q.id]) btn.classList.add("doubt");
+        if (idx === currentIdx) btn.classList.add("active");
         btn.textContent = idx + 1;
         btn.onclick = () => {
           currentIdx = idx;
@@ -635,6 +707,7 @@
 
     function renderQuestion() {
       renderNav();
+      updateDoubtButton();
       const q = QUESTIONS[currentIdx];
       document.getElementById("qTopic").textContent = q.topik;
       document.getElementById("qProgress").textContent = `Soal ${currentIdx + 1} dari ${QUESTIONS.length}`;
@@ -715,7 +788,7 @@
 
       document.getElementById("btnPrev").disabled = currentIdx === 0;
       document.getElementById("btnNext").disabled = currentIdx === QUESTIONS.length - 1;
-    }
+            }
 
     function prevQuestion() {
       if (currentIdx > 0) {
@@ -733,10 +806,16 @@
 
     function confirmFinishExam() {
       const unansweredCount = QUESTIONS.filter(q => !isAnswered(q)).length;
-      const msg = unansweredCount > 0
-        ? `Masih ada ${unansweredCount} soal yang belum terjawab. Yakin ingin mengirim jawaban sekarang?`
-        : "Yakin ingin menyelesaikan dan mengirim jawaban ujian?";
-      if (confirm(msg)) {
+      const doubtCount = QUESTIONS.filter(q => Boolean(doubtFlags[q.id])).length;
+      let extra = "";
+      if (unansweredCount > 0 && doubtCount > 0) {
+        extra = `Masih ada ${unansweredCount} soal belum terjawab dan ${doubtCount} soal ditandai ragu-ragu. `;
+      } else if (unansweredCount > 0) {
+        extra = `Masih ada ${unansweredCount} soal yang belum terjawab. `;
+      } else if (doubtCount > 0) {
+        extra = `Masih ada ${doubtCount} soal yang ditandai ragu-ragu. `;
+      }
+      if (confirm(`${extra}Yakin ingin menyelesaikan dan mengirim jawaban ujian?`)) {
         submitExam(false);
       }
     }
@@ -769,7 +848,7 @@
         };
       }
       return { isCorrect: false, fraction: 0 };
-        }
+    }
 
     function submitExam(isAuto) {
       clearInterval(timerInterval);
@@ -779,18 +858,17 @@
       document.getElementById("btnTeacherMode").classList.remove("hidden");
 
       const elapsedSec = Math.max(1, Math.min(EXAM_DURATION_SEC, Math.round((Date.now() - startTimeMs) / 1000)));
-      let totalFraction = 0;
-      let fullCorrectCount = 0;
+      const formattedDuration = formatTime(elapsedSec);
+      const answeredCount = QUESTIONS.filter(q => isAnswered(q)).length;
 
+      let totalFraction = 0;
       const reviewContainer = document.getElementById("reviewContainer");
       reviewContainer.innerHTML = "";
-
       const labels = ["A", "B", "C", "D", "E"];
 
       QUESTIONS.forEach((q, idx) => {
         const res = scoreQuestion(q);
         totalFraction += res.fraction;
-        if (res.isCorrect) fullCorrectCount++;
 
         let studentAnsText = "-";
         let keyText = "";
@@ -827,21 +905,21 @@
       });
 
       const finalScore = Math.round((totalFraction / QUESTIONS.length) * 10000) / 100;
-      document.getElementById("resultStudentInfo").textContent =
-        `${studentInfo.name} • Kelas ${studentInfo.cls} • Absen ${studentInfo.absen}${isAuto ? " (Waktu Habis)" : ""}`;
       document.getElementById("finalScore").textContent = finalScore;
-      document.getElementById("scoreDetail").textContent =
-        `Skor Poin: ${totalFraction.toFixed(2)} / ${QUESTIONS.length} soal • Durasi: ${formatTime(elapsedSec)}`;
+      document.getElementById("resultTime").textContent = formattedDuration;
+      document.getElementById("resultAnswered").textContent = `${answeredCount}/${QUESTIONS.length}`;
 
       const record = {
         timestamp: new Date().toLocaleString("id-ID"),
         name: studentInfo.name,
         cls: studentInfo.cls,
         absen: studentInfo.absen,
+        answeredCount: `${answeredCount}/${QUESTIONS.length}`,
         correctPoints: Number(totalFraction.toFixed(2)),
         totalQuestions: QUESTIONS.length,
         score: finalScore,
-        duration: formatTime(elapsedSec)
+        duration: formattedDuration,
+        autoSubmitted: Boolean(isAuto)
       };
       lastResultRecord = record;
 
@@ -865,7 +943,7 @@
       return [r.timestamp, r.name, r.cls, r.absen, r.correctPoints, r.score, r.duration]
         .map(v => String(v).replace(/\t|\r?\n/g, " "))
         .join("\t");
-            }
+    }
 
     function copyTextToClipboard(text, targetStatusId, successMsg) {
       const el = document.getElementById(targetStatusId);
@@ -893,12 +971,6 @@
         el.textContent = "Gagal menyalin otomatis. Silakan salin manual.";
       }
       document.body.removeChild(ta);
-    }
-
-    function copySingleResultTSV() {
-      if (!lastResultRecord) return;
-      const tsv = recordToTSVRow(lastResultRecord);
-      copyTextToClipboard(tsv, "studentExportStatus", "Baris hasil tersalin (TSV). Buka Canva Sheets lalu tempel (Paste).");
     }
 
     function copyAllResultsTSV() {
@@ -1001,12 +1073,6 @@
       });
       document.getElementById("teacherStatus").style.color = "var(--success)";
       document.getElementById("teacherStatus").textContent = "Permintaan uji coba dikirim ke Webhook.";
-    }
-
-    function resetToLogin() {
-      document.getElementById("resultSection").classList.add("hidden");
-      document.getElementById("loginSection").classList.remove("hidden");
-      document.getElementById("studentExportStatus").textContent = "";
     }
   </script>
 </body>
