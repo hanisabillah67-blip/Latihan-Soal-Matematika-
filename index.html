@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CBT Matematika Kelas XII — Kaidah Pencacahan &amp; Peluang</title>
+  <title>CBT Matematika Kelas XII — Asesmen 2</title>
   <style>
     :root {
       --primary: #1e40af;
@@ -450,9 +450,9 @@
         </div>
         <button id="btnFinish" type="button" class="btn-success" onclick="confirmFinishExam()">Selesai &amp; Kirim Jawaban</button>
       </div>
-    </section>
+</section>
 
-    <!-- HALAMAN HASIL (HANYA NILAI, WAKTU, SOAL TERJAWAB, DAN PEMBAHASAN) -->
+      <!-- HALAMAN HASIL (HANYA NILAI, WAKTU, SOAL TERJAWAB, DAN PEMBAHASAN) -->
     <section id="resultSection" class="card hidden">
       <h2 style="margin-top:0;">Hasil Ujian</h2>
       <div class="summary-grid">
@@ -527,97 +527,101 @@
 
     const QUESTIONS = [
       {
-        id: "S1",
-        topik: "Kaidah Pencacahan — Aturan Perkalian",
+        id: "KP1",
+        topik: "Asesmen 2 — Kaidah Pencacahan (Soal 1)",
         type: "mc",
-        text: "Dari kota A ke kota B terdapat 3 jalur berbeda, dan dari kota B ke kota C terdapat 4 jalur berbeda. Banyak cara seseorang berangkat dari kota A ke kota C melalui kota B adalah...",
-        options: ["7 cara", "10 cara", "12 cara", "24 cara", "64 cara"],
-        answer: 2,
-        explanation: "Banyak cara = 3 x 4 = 12 cara menggunakan aturan perkalian."
-      },
-      {
-        id: "S2",
-        topik: "Kaidah Pencacahan — Bilangan",
-        type: "mc",
-        text: "Tersedia angka 1, 2, 3, 4, 5, dan 6. Akan disusun bilangan terdiri atas 3 angka berbeda yang bernilai genap. Banyak bilangan yang dapat dibentuk adalah...",
-        options: ["36", "60", "72", "108", "120"],
-        answer: 1,
-        explanation: "Satuan harus genap (2, 4, atau 6) -> 3 pilihan. Sisa 5 angka untuk ratusan, lalu 4 angka untuk puluhan: 5 x 4 x 3 = 60."
-      },
-      {
-        id: "S3",
-        topik: "Permutasi",
-        type: "mc",
-        text: "Dalam sebuah pemilihan pengurus kelas akan dipilih Ketua, Sekretaris, dan Bendahara dari 8 calon siswa. Banyak susunan pengurus yang mungkin terbentuk adalah...",
-        options: ["24", "56", "168", "336", "512"],
+        text: "Diketahui banyak jalan dari kota A ke kota B ada 5 jalan, dan banyak jalan dari kota B ke kota C ada 3 jalan. Jika seseorang melakukan perjalanan pergi pulang (A → B → C → B → A) tanpa syarat tidak boleh melewati jalan yang sama, banyak variasi jalan yang dapat dilalui adalah...",
+        options: ["30 jalan", "45 jalan", "120 jalan", "225 jalan", "450 jalan"],
         answer: 3,
-        explanation: "Urutan jabatan diperhatikan (Permutasi P(8,3) = 8 x 7 x 6 = 336)."
+        explanation: "A ke B = 5 jalan, B ke C = 3 jalan, C ke B = 3 jalan, dan B ke A = 5 jalan. Banyak variasi jalan = 5 × 3 × 3 × 5 = 225 jalan."
       },
       {
-        id: "S4",
-        topik: "Kombinasi",
-        type: "mc",
-        text: "Sebuah tim lomba matematika beranggotakan 4 orang akan dipilih dari 9 siswa terbaik. Banyak cara membentuk tim tersebut adalah...",
-        options: ["36", "72", "126", "252", "3024"],
-        answer: 2,
-        explanation: "Urutan anggota tim tidak diperhatikan (Kombinasi C(9,4) = (9x8x7x6)/(4x3x2x1) = 126)."
-      },
-      {
-        id: "S5",
-        topik: "Kaidah Pencacahan — Peluang",
+        id: "KP2",
+        topik: "Asesmen 2 — Kaidah Pencacahan (Soal 2)",
         type: "short",
-        text: "Kode sandi 4 digit dibentuk dari angka 0 sampai 9 dengan boleh berulang. Jika digit pertama tidak boleh 0, berapa banyak kode sandi yang dapat dibuat? (Tulis angka saja)",
-        answer: "9000",
-        explanation: "Digit pertama: 9 pilihan (1-9), digit ke-2, ke-3, ke-4 masing-masing 10 pilihan -> 9 x 10 x 10 x 10 = 9000."
+        text: "Diketahui banyak jalan dari kota C ke kota B ada 3 jalan dan dari kota B ke kota A ada 5 jalan. Seseorang berangkat dari kota C menuju kota A melalui kota B, lalu pulang dari kota A menuju kota C melalui kota B dengan syarat saat pulang tidak boleh melalui jalan yang sama. Berapa banyak variasi jalan seluruhnya? (Tulis angka saja)",
+        answer: "120",
+        explanation: "Berangkat (C → B → A): 3 × 5 = 15 cara. Pulang (A → B → C) tanpa jalan yang sama: 4 × 2 = 8 cara. Total variasi = 3 × 5 × 4 × 2 = 120 jalan."
       },
       {
-        id: "S6",
-        topik: "Peluang Kejadian — Dadu",
-        type: "mc",
-        text: "Dua buah dadu dilempar undi bersamaan satu kali. Peluang muncul mata dadu berjumlah 9 adalah...",
-        options: ["1/12", "1/9", "1/6", "4/9", "5/18"],
-        answer: 1,
-        explanation: "Ruang sampel n(S) = 36. Pasangan berjumlah 9: (3,6), (4,5), (5,4), (6,3) -> 4 kejadian. Peluang = 4/36 = 1/9."
+        id: "KP3",
+        topik: "Asesmen 2 — Kaidah Pencacahan (Soal 3)",
+        type: "tf_multi",
+        text: "Anggota keluarga terdiri atas 5 orang (Vito, Ayah, Ibu, Rina, dan Rani) duduk melingkar (permutasi siklis). Tentukan Benar atau Salah untuk setiap pernyataan berikut:",
+        statements: [
+          { text: "Jika Ayah dan Ibu selalu berdampingan, banyak cara duduk melingkar adalah 12 cara.", answer: "Benar" },
+          { text: "Jika Rani selalu duduk di antara Ayah dan Ibu, banyak cara duduk melingkar adalah 24 cara.", answer: "Salah" },
+          { text: "Jika Vito selalu duduk di antara Rina dan Rani, banyak cara duduk melingkar adalah 4 cara.", answer: "Benar" },
+          { text: "Jika Vito dekat Ayah dan Rina dekat Ibu, banyak cara duduk melingkar adalah 4 cara.", answer: "Salah" },
+          { text: "Jika Vito dan kedua adiknya selalu berdampingan, banyak cara duduk melingkar adalah 12 cara.", answer: "Benar" }
+        ],
+        explanation: "Pernyataan 1: (4-1)! × 2! = 6 × 2 = 12 (Benar). Pernyataan 2: Rani di antara Ayah dan Ibu → (3-1)! × 2! = 4 cara, bukan 24 (Salah). Pernyataan 3: (3-1)! × 2! = 4 cara (Benar). Pernyataan 4: (3-1)! × 2! × 2! = 8 cara, bukan 4 (Salah). Pernyataan 5: (3-1)! × 3! = 2 × 6 = 12 cara (Benar)."
       },
       {
-        id: "S7",
-        topik: "Peluang Komplemen",
+        id: "KP4",
+        topik: "Asesmen 2 — Kaidah Pencacahan (Soal 4 - Menjodohkan)",
         type: "mc",
-        text: "Peluang seorang siswa lulus ujian Matematika adalah 0,85. Peluang siswa tersebut tidak lulus ujian adalah...",
-        options: ["0,05", "0,15", "0,25", "0,85", "1,15"],
-        answer: 1,
-        explanation: "P(tidak lulus) = 1 - P(lulus) = 1 - 0,85 = 0,15."
-      },
-      {
-        id: "S8",
-        topik: "Peluang Kejadian Majemuk — Saling Lepas",
-        type: "mc",
-        text: "Satu kartu diambil secara acak dari satu set kartu bridge (52 kartu). Peluang terambil kartu As atau kartu King adalah...",
-        options: ["1/52", "1/26", "2/13", "4/13", "8/13"],
+        text: "Password terdiri atas 6 karakter berbeda (4 huruf dan 2 angka) yang dapat diacak (6! = 720 susunan). Pilihan angka (prima < 10) adalah {2, 3, 5, 7} dan pilihan huruf adalah {b, c, r, s, t, a, v}. Pasangkan ketentuan 'Harus terdapat huruf vokal' dengan banyak password yang tepat!",
+        options: ["32.400", "75.600", "86.400", "120.000", "151.200"],
         answer: 2,
-        explanation: "Kejadian saling lepas: P(As U King) = 4/52 + 4/52 = 8/52 = 2/13."
+        explanation: "Harus terdapat huruf vokal ('a' ada 1): C(1,1) × C(6,3) × C(4,2) × 6! = 1 × 20 × 6 × 720 = 86.400. (Sebagai acuan: angka ganjil & huruf konsonan = 32.400; angka genap = 75.600; tanpa ketentuan = 151.200)."
       },
       {
-        id: "S9",
-        topik: "Peluang Kejadian Saling Bebas",
+        id: "KP5",
+        topik: "Asesmen 2 — Kaidah Pencacahan (Soal 5)",
+        type: "mc",
+        text: "Dengan ketentuan password 6 karakter berbeda dari 4 huruf {b, c, r, s, t, a, v} dan 2 angka prima kurang dari 10 {2, 3, 5, 7}, jika posisi pertama sudah pasti huruf v, banyak password yang dapat dibuat adalah...",
+        options: ["7.200", "10.800", "12.000", "14.400", "28.800"],
+        answer: 3,
+        explanation: "Posisi pertama sudah pasti 'v' (1 pilihan). 5 posisi tersisa diisi 3 huruf dari 6 huruf tersisa (C(6,3) = 20) dan 2 angka dari 4 angka (C(4,2) = 6) yang diacak (5! = 120). Banyak password = 1 × 20 × 6 × 120 = 14.400."
+      },
+      {
+        id: "PK1",
+        topik: "Asesmen 2 — Peluang Kejadian (Soal 1)",
+        type: "mc",
+        text: "Dalam sebuah kotak terdapat 20 bola berbagai warna, terdiri atas 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau. Jika diambil 1 bola secara acak, peluang terambil bola biru atau bola hijau adalah...",
+        options: ["3/20", "7/20", "1/5", "2/5", "1/2"],
+        answer: 4,
+        explanation: "Banyak bola hijau = 20 - (7 + 4 + 6) = 3 bola. Kejadian saling lepas: P(Biru atau Hijau) = (7 + 3)/20 = 10/20 = 1/2."
+      },
+      {
+        id: "PK2",
+        topik: "Asesmen 2 — Peluang Kejadian (Soal 2 - Menjodohkan)",
+        type: "mc",
+        text: "Dari kotak berisi 20 bola (7 biru, 4 merah, 6 kuning, dan 3 hijau), diambil 2 bola sekaligus secara acak sehingga n(S) = C(20,2) = 190. Pasangkan ketentuan 'Terambil keduanya bola kuning' dengan nilai peluang yang tepat!",
+        options: ["21/190", "3/95", "3/38", "6/95", "9/95"],
+        answer: 2,
+        explanation: "Terambil keduanya bola kuning = C(6,2) / 190 = ((6 × 5)/2) / 190 = 15/190 = 3/38. (Sebagai acuan: keduanya biru = 21/190; keduanya merah = 6/190 = 3/95; merah dan hijau = 12/190 = 6/95; kuning dan hijau = 18/190 = 9/95)."
+      },
+      {
+        id: "PK3",
+        topik: "Asesmen 2 — Peluang Kejadian (Soal 3)",
+        type: "short",
+        text: "Dari kotak berisi 20 bola (7 biru, 4 merah, 6 kuning, dan 3 hijau), diambil 3 bola sekaligus secara acak. Tentukan peluang terambil ketiganya bola kuning! (Tulis dalam bentuk pecahan paling sederhana seperti 1/57)",
+        answer: "1/57",
+        explanation: "n(S) = C(20,3) = (20 × 19 × 18)/(3 × 2 × 1) = 1.140. n(A) = C(6,3) = (6 × 5 × 4)/(3 × 2 × 1) = 20. Peluang = 20/1.140 = 1/57."
+      },
+      {
+        id: "PK4",
+        topik: "Asesmen 2 — Peluang Kejadian (Soal 4)",
         type: "tf_multi",
         text: "Kejadian banjir di kota X, Y, dan Z saling bebas dengan P(X) = 2/3, P(Y) = 1/4, dan P(Z) = 1/2. Tentukan Benar atau Salah untuk setiap pernyataan berikut:",
         statements: [
           { text: "Peluang di kota X dan kota Y terjadi banjir sebesar 1/6.", answer: "Benar" },
           { text: "Peluang di kota X dan kota Z terjadi banjir sebesar 1/4.", answer: "Salah" },
           { text: "Peluang di kota Y dan kota Z terjadi banjir sebesar 1/8.", answer: "Benar" },
-          { text: "Peluang di kota X dan kota Y terjadi banjir lebih kecil daripada kota Y dan Z.", answer: "Salah" },
-          { text: "Peluang di kota X dan kota Z terjadi banjir lebih besar daripada kota X dan Y.", answer: "Benar" }
+          { text: "Peluang di kota X dan kota Y terjadi banjir lebih kecil daripada kota X dan kota Z.", answer: "Benar" },
+          { text: "Peluang di kota X dan kota Z terjadi banjir lebih besar daripada kota Y dan kota Z.", answer: "Benar" }
         ],
-        explanation: "P(X∩Y) = 2/3 x 1/4 = 1/6 (Benar); P(X∩Z) = 2/3 x 1/2 = 1/3, bukan 1/4 (Salah); P(Y∩Z) = 1/4 x 1/2 = 1/8 (Benar)."
+        explanation: "P(X∩Y) = 2/3 × 1/4 = 1/6 (Benar). P(X∩Z) = 2/3 × 1/2 = 1/3, bukan 1/4 (Salah). P(Y∩Z) = 1/4 × 1/2 = 1/8 (Benar). Karena 1/6 < 1/3 (Benar) dan 1/3 > 1/8 (Benar)."
       },
       {
-        id: "S10",
-        topik: "Peluang Kejadian",
+        id: "PK5",
+        topik: "Asesmen 2 — Peluang Kejadian (Soal 5)",
         type: "short",
-        text: "Jika kejadian banjir di kota X, Y, dan Z saling bebas dengan P(X) = 2/3, P(Y) = 1/4, dan P(Z) = 1/2, tentukan peluang ketiganya terjadi banjir secara bersamaan (tulis dalam bentuk pecahan seperti 1/12).",
+        text: "Kejadian banjir di kota X, Y, dan Z saling bebas dengan P(X) = 2/3, P(Y) = 1/4, dan P(Z) = 1/2. Tentukan peluang ketiga kota terjadi banjir secara bersamaan! (Tulis dalam bentuk pecahan seperti 1/12)",
         answer: "1/12",
-        explanation: "P(X ∩ Y ∩ Z) = P(X) x P(Y) x P(Z) = (2/3) x (1/4) x (1/2) = 2/24 = 1/12."
+        explanation: "P(X ∩ Y ∩ Z) = P(X) × P(Y) × P(Z) = (2/3) × (1/4) × (1/2) = 2/24 = 1/12."
       }
     ];
 
@@ -926,9 +930,9 @@
         };
       }
       return { isCorrect: false, fraction: 0 };
-            }
+    }
 
-      function submitExam(isAuto) {
+    function submitExam(isAuto) {
       isExamActive = false;
       clearInterval(timerInterval);
       document.getElementById("timerBox").classList.add("hidden");
