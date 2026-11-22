@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CBT Matematika Kelas XII — Kaidah Pencacahan & Peluang</title>
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-hover: #1d4ed8;
+      --accent: #0ea5e9;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --warning: #d97706;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+      color: #fff;
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.15);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    header .sub {
+      font-size: 0.8rem;
+      opacity: 0.88;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .timer-badge {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      font-size: 0.95rem;
+    }
+    .timer-badge.urgent {
+      background: #dc2626;
+      border-color: #fecaca;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.72; }
+    }
+    .container {
+      max-width: 960px;
+      margin: 24px auto;
+      padding: 0 16px 48px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      margin-bottom: 18px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.05s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-success:hover { background: #15803d; }
+    .btn-outline {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { background: #f8fafc; }
+    .btn-ghost {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 6px 12px;
+      font-size: 0.82rem;
+    }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #334155;
+    }
+    input[type="text"], input[type="password"], input[type="url"], select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      font-size: 0.94rem;
+      background: #fff;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.12);
+    }
+    .hidden { display: none !important; }
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 600px) {
+      .nav-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    .nav-pill {
+      padding: 8px 4px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-align: center;
+    }
+    .nav-pill.active {
+      border-color: var(--primary);
+      background: #dbeafe;
+      color: var(--primary);
+    }
+    .nav-pill.answered {
+      background: #dcfce7;
+      border-color: #86efac;
+      color: #166534;
+    }
+    .nav-pill.active.answered {
+      background: #1e40af;
+      border-color: #1e40af;
+      color: #fff;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: #e0e7ff;
+      color: #1e40af;
+      margin-bottom: 10px;
+    }
+    .question-text {
+      font-size: 1.02rem;
+      margin-bottom: 16px;
+      white-space: pre-line;
+    }
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 9px;
+      cursor: pointer;
+      transition: background 0.12s, border-color 0.12s;
+    }
+    .option-item:hover { background: #f8fafc; }
+    .option-item.selected {
+      background: #eff6ff;
+      border-color: var(--primary);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+    th {
+      background: #f8fafc;
+      font-weight: 700;
+    }
+    .exam-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .score-box {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+      border-radius: 14px;
+      border: 1px solid #bfdbfe;
+      margin-bottom: 18px;
+    }
+    .score-num {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+    .review-item {
+      border-left: 4px solid #cbd5e1;
+      padding: 12px 14px;
+      background: #f8fafc;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 12px;
+    }
+    .review-item.correct { border-left-color: var(--success); }
+    .review-item.partial { border-left-color: var(--warning); }
+    .review-item.wrong { border-left-color: var(--danger); }
+    .alert {
+      padding: 10px 14px;
+      border-radius: 9px;
+      font-size: 0.88rem;
+      margin-top: 10px;
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+    .alert.ok {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #86efac;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>CBT Matematika Kelas XII — Asesmen 2</h1>
+    <div class="sub">Kaidah Pencacahan &amp; Peluang Kejadian &bull; Durasi 75 Menit</div>
+  </div>
+  <div class="header-actions">
+    <div id="timerDisplay" class="timer-badge hidden">01:15:00</div>
+    <button class="btn btn-ghost" onclick="openTeacherModal()">Mode Guru</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- HALAMAN AWAL / IDENTITAS -->
+  <section id="startSection" class="card">
+    <h2 style="margin-top:0;">Identitas Peserta Ujian</h2>
+    <p style="color:var(--muted); margin-top:-6px;">
+      Isi data diri di bawah ini sebelum memulai ujian. Waktu pengerjaan adalah <strong>75 menit</strong> (10 soal).
+    </p>
+    <div class="grid-2">
+      <div>
+        <label for="studentName">Nama Lengkap *</label>
+        <input type="text" id="studentName" placeholder="Contoh: Hani Sabillah" />
+      </div>
+      <div>
+        <label for="studentClass">Kelas *</label>
+        <input type="text" id="studentClass" placeholder="Contoh: XII.1" />
+      </div>
+      <div>
+        <label for="studentAbsen">Nomor Absen *</label>
+        <input type="text" id="studentAbsen" placeholder="Contoh: 07" />
+      </div>
+    </div>
+    <div style="margin-top:18px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+      <button class="btn btn-primary" onclick="startExam()">Mulai Ujian (75 Menit)</button>
+      <span id="startError" style="color:var(--danger); font-size:0.88rem; font-weight:600;"></span>
+    </div>
+  </section>
+
+  <!-- HALAMAN UJIAN -->
+  <section id="examSection" class="hidden">
+    <div class="card" style="padding:14px 18px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-size:0.85rem;">
+        <span id="participantTag" style="font-weight:600;"></span>
+        <span id="progressTag" style="color:var(--muted);">Terjawab: 0 / 10</span>
+      </div>
+      <div id="navGrid" class="nav-grid"></div>
+    </div>
+
+    <div class="card">
+      <div id="questionContainer"></div>
+      <div class="exam-footer">
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-outline" id="prevBtn" onclick="prevQuestion()">&larr; Sebelumnya</button>
+          <button class="btn btn-outline" id="nextBtn" onclick="nextQuestion()">Berikutnya &rarr;</button>
+        </div>
+        <button class="btn btn-success" onclick="confirmSubmit()">Selesai &amp; Kumpulkan</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HALAMAN HASIL & CANVA SHEETS -->
+  <section id="resultSection" class="hidden">
+    <div class="card">
+      <div class="score-box">
+        <div style="font-size:0.9rem; color:var(--muted); font-weight:600;">NILAI AKHIR UJIAN</div>
+        <div id="finalScore" class="score-num">0</div>
+        <div id="resultSummary" style="margin-top:6px; font-size:0.92rem;"></div>
+      </div>
+
+      <h3 style="margin-bottom:6px;">Sinkronisasi ke Canva Sheets</h3>
+      <p style="color:var(--muted); font-size:0.9rem; margin-top:0;">
+        Klik <strong>Salin Tabel (1-Klik Paste)</strong> lalu buka <strong>Canva Sheets</strong>, klik sel <code>A1</code> (atau baris kosong berikutnya), dan tekan <code>Ctrl + V</code> / <strong>Tempel</strong> — seluruh kolom otomatis terpisah rapi.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <button class="btn btn-primary" onclick="copyCurrentResultTSV()">Salin Tabel (1-Klik Paste Canva Sheets)</button>
+        <button class="btn btn-outline" onclick="downloadCurrentResultCSV()">Unduh CSV</button>
+      </div>
+      <div id="syncStatus" class="alert hidden"></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Kunci Jawaban &amp; Pembahasan</h3>
+      <div id="reviewContainer"></div>
+    </div>
+  </section>
+
+  <!-- PANEL MODE GURU -->
+  <section id="teacherSection" class="card hidden">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <h2 style="margin:0;">Panel Guru — Rekap Respon &amp; Canva Sheets</h2>
+      <button class="btn btn-outline" onclick="closeTeacherPanel()">Tutup Panel Guru</button>
+    </div>
+    <p style="color:var(--muted); font-size:0.9rem;">
+      Kelola seluruh respon peserta di perangkat ini dan atur Webhook URL (opsional) untuk pengiriman otomatis daring.
+    </p>
+
+    <div class="grid-2" style="margin-bottom:14px;">
+      <div>
+        <label for="webhookInput">Webhook URL (Opsional — untuk Kirim Otomatis Lintas Perangkat)</label>
+        <input type="url" id="webhookInput" placeholder="https://script.google.com/macros/s/.../exec" />
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:8px;">
+        <button class="btn btn-primary" onclick="saveWebhook()">Simpan Webhook</button>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+      <button class="btn btn-success" onclick="copyAllResultsTSV()">Salin Semua Rekap (Paste ke Canva Sheets)</button>
+      <button class="btn btn-outline" onclick="downloadAllResultsCSV()">Unduh Semua Rekap (.CSV)</button>
+      <button class="btn btn-danger" onclick="clearAllResults()">Hapus Semua Data</button>
+    </div>
+    <div id="teacherMsg" class="alert ok hidden"></div>
+
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Waktu</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Absen</th>
+            <th>Durasi</th>
+            <th>Skor</th>
+          </tr>
+        </thead>
+        <tbody id="teacherTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const EXAM_DURATION_SEC = 75 * 60; // 75 menit
+const TEACHER_PIN = "1234";
+const STORAGE_KEY = "cbt_mat_xii_asin2_results";
+const WEBHOOK_KEY = "cbt_mat_xii_webhook";
+
+const QUESTIONS = [
+  {
+    id: "S1",
+    topik: "Kaidah Pencacahan",
+    type: "pg",
+    text: "Diketahui banyak jalan dari kota A ke kota B adalah 5 jalan dan dari kota B ke kota C adalah 3 jalan. Seseorang melakukan perjalanan pergi pulang (A -> B -> C -> B -> A) tanpa syarat tidak boleh melewati jalan yang sama. Banyak variasi jalan yang dapat ditempuh adalah...",
+    options: { A: "15", B: "30", C: "90", D: "150", E: "225" },
+    answer: "E",
+    explanation: "Perjalanan pergi-pulang tanpa syarat khusus: A->B (5) x B->C (3) x C->B (3) x B->A (5) = 225 jalan."
+  },
+  {
+    id: "S2",
+    topik: "Kaidah Pencacahan",
+    type: "pg",
+    text: "Banyak jalan dari kota C ke kota B adalah 3 jalan dan dari kota B ke kota A adalah 5 jalan. Jika berangkat dari kota C menuju kota A melewati B, lalu pulang ke C melewati B dengan syarat saat pulang tidak boleh melalui jalan yang sama, banyak variasi jalan seluruhnya adalah...",
+    options: { A: "60", B: "90", C: "120", D: "180", E: "225" },
+    answer: "C",
+    explanation: "Berangkat (C->B->A): 3 x 5. Pulang (A->B->C) tidak melewati jalan yang sama: (5 - 1) x (3 - 1) = 4 x 2. Total = 3 x 5 x 4 x 2 = 120 jalan."
+  },
+  {
+    id: "S3",
+    topik: "Kaidah Pencacahan",
+    type: "tf_multi",
+    text: "Anggota keluarga ada 5 orang (Vito, Ayah, Ibu, Rina, dan Rani) duduk melingkar (permutasi siklis). Tentukan Benar atau Salah untuk setiap pernyataan berikut:",
+    statements: [
+      { text: "Ayah dan Ibu berdampingan ada 12 cara.", answer: "Benar" },
+      { text: "Rani di antara Ayah dan Ibu ada 24 cara.", answer: "Salah" },
+      { text: "Vito di antara Rina dan Rani ada 4 cara.", answer: "Benar" },
+      { text: "Vito dekat Ayah dan Rina dekat Ibu ada 4 cara.", answer: "Salah" },
+      { text: "Vito dan kedua adiknya berdampingan ada 12 cara.", answer: "Benar" }
+    ],
+    explanation: "1) (4-1)! x 2! = 12 (Benar). 2) (3-1)! x 2! = 4, bukan 24 (Salah). 3) (3-1)! x 2! = 4 (Benar). 4) (3-1)! x 2! x 2! = 8, bukan 4 (Salah). 5) (3-1)! x 3! = 12 (Benar)."
+  },
+  {
+    id: "S4",
+    topik: "Kaidah Pencacahan",
+    type: "matching",
+    text: "Password terdiri atas 6 karakter berbeda (4 huruf dan 2 angka) dari pilihan angka prima < 10 {2, 3, 5, 7} dan huruf {b, c, r, s, t, a, v}. Jodohkan setiap ketentuan berikut dengan banyak password yang tepat:",
+    choices: ["32.400", "75.600", "86.400", "151.200"],
+    pairs: [
+      { left: "Angka harus ganjil dan huruf harus konsonan", answer: "32.400" },
+      { left: "Tanpa ketentuan angka dan huruf yang dipilih", answer: "151.200" },
+      { left: "Harus terdapat huruf vokal", answer: "86.400" },
+      { left: "Harus terdapat angka genap", answer: "75.600" }
+    ],
+    explanation: "• Ganjil & konsonan: C(3,2) x C(6,4) x 6! = 3 x 15 x 720 = 32.400.\n• Tanpa ketentuan: C(4,2) x C(7,4) x 6! = 6 x 35 x 720 = 151.200.\n• Terdapat vokal: C(1,1) x C(6,3) x C(4,2) x 6! = 1 x 20 x 6 x 720 = 86.400.\n• Terdapat angka genap: C(1,1) x C(3,1) x C(7,4) x 6! = 1 x 3 x 35 x 720 = 75.600."
+  },
+  {
+    id: "S5",
+    topik: "Kaidah Pencacahan",
+    type: "pg",
+    text: "Berdasarkan informasi password 6 karakter berbeda (4 huruf dari {b, c, r, s, t, a, v} dan 2 angka dari {2, 3, 5, 7}), jika posisi pertama sudah pasti huruf v, berapa banyak password yang dapat dibuat?",
+    options: { A: "7.200", B: "10.800", C: "12.000", D: "14.400", E: "28.800" },
+    answer: "D",
+    explanation: "Posisi pertama huruf v (1 pilihan), sisa 5 posisi diacak (5! = 120). Memilih 3 huruf dari 6 tersisa: C(6,3) = 20; memilih 2 angka dari 4: C(4,2) = 6. Total = 1 x 20 x 6 x 120 = 14.400."
+  },
+  {
+    id: "S6",
+    topik: "Peluang Kejadian",
+    type: "pg",
+    text: "Total bola dalam kotak adalah 20 bola terdiri atas 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau. Jika diambil 1 bola secara acak, tentukan peluang terambil bola biru atau hijau.",
+    options: { A: "3/20", B: "7/20", C: "2/5", D: "9/20", E: "1/2" },
+    answer: "E",
+    explanation: "Banyak bola hijau = 20 - (7 + 4 + 6) = 3 bola. P(Biru atau Hijau) = (7 + 3)/20 = 10/20 = 1/2."
+  },
+  {
+    id: "S7",
+    topik: "Peluang Kejadian",
+    type: "matching",
+    text: "Dari kotak berisi 20 bola (7 biru, 4 merah, 6 kuning, 3 hijau), diambil 2 bola sekaligus secara acak. Jodohkan ketentuan pengambilan berikut dengan nilai peluang yang tepat:",
+    choices: ["21/190", "3/95", "3/38", "6/95", "9/95"],
+    pairs: [
+      { left: "Terambil keduanya bola biru", answer: "21/190" },
+      { left: "Terambil keduanya bola merah", answer: "3/95" },
+      { left: "Terambil keduanya bola kuning", answer: "3/38" },
+      { left: "Terambil bola merah dan bola hijau", answer: "6/95" },
+      { left: "Terambil bola kuning dan bola hijau", answer: "9/95" }
+    ],
+    explanation: "Ruang sampel n(S) = C(20,2) = 190. Biru-biru = 21/190; Merah-merah = 6/190 = 3/95; Kuning-kuning = 15/190 = 3/38; Merah-hijau = 12/190 = 6/95; Kuning-hijau = 18/190 = 9/95."
+  },
+  {
+    id: "S8",
+    topik: "Peluang Kejadian",
+    type: "short",
+    text: "Dari kotak berisi 20 bola (termasuk 6 bola kuning), diambil 3 bola sekaligus secara acak. Tentukan peluang terambil ketiganya bola kuning! (Tulis dalam bentuk pecahan paling sederhana, contoh: 1/2)",
+    answer: "1/57",
+    explanation: "n(S) = C(20,3) = 1.140; n(A) = C(6,3) = 20. Peluang P(A) = 20/1.140 = 1/57."
+  },
+  {
+    id: "S9",
+    topik: "Peluang Kejadian",
+    type: "tf_multi",
+    text: "Kejadian banjir di kota X, Y, dan Z saling bebas dengan P(X) = 2/3, P(Y) = 1/4, dan P(Z) = 1/2. Tentukan Benar atau Salah untuk setiap pernyataan berikut:",
+    statements: [
+      { text: "Peluang di kota X dan kota Y terjadi banjir sebesar 1/6.", answer: "Benar" },
+      { text: "Peluang di kota X dan kota Z terjadi banjir sebesar 1/4.", answer: "Salah" },
+      { text: "Peluang di kota Y dan kota Z terjadi banjir sebesar 1/8.", answer: "Benar" },
+      { text: "Peluang di kota X dan kota Y terjadi banjir lebih kecil daripada kota X dan kota Z.", answer: "Benar" },
+      { text: "Peluang di kota X dan kota Z terjadi banjir lebih besar daripada kota Y dan kota Z.", answer: "Benar" }
+    ],
+    explanation: "P(X∩Y) = 2/3 x 1/4 = 1/6 (Benar); P(X∩Z) = 2/3 x 1/2 = 1/3, bukan 1/4 (Salah); P(Y∩Z) = 1/4 x 1/2 = 1/8 (Benar); 1/6 < 1/3 (Benar); 1/3 > 1/8 (Benar)."
+  },
+  {
+    id: "S10",
+    topik: "Peluang Kejadian",
+    type: "short",
+    text: "Jika kejadian banjir di kota X, Y, dan Z saling bebas dengan P(X) = 2/3, P(Y) = 1/4, dan P(Z) = 1/2, berapa peluang ketiga kota terjadi banjir bersamaan? (Tulis dalam bentuk pecahan paling sederhana)",
+    answer: "1/12",
+    explanation: "P(X ∩ Y ∩ Z) = P(X) x P(Y) x P(Z) = (2/3) x (1/4) x (1/2) = 2/24 = 1/12."
+  }
+];
+
+let currentIdx = 0;
+let userAnswers = {};
+let remainingSec = EXAM_DURATION_SEC;
+let timerInterval = null;
+let startTimeMs = 0;
+let studentInfo = {};
+let lastResultRecord = null;
+
+function formatTime(sec) {
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = sec % 60;
+  return [h, m, s].map(v => String(v).padStart(2, "0")).join(":");
+}
+
+function startExam() {
+  const name = document.getElementById("studentName").value.trim();
+  const cls = document.ge
