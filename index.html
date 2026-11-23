@@ -392,7 +392,7 @@
     </div>
     <div class="header-actions">
       <div id="timerBox" class="timer-badge hidden">75:00</div>
-      <button id="btnTeacherMode" type="button" class="btn-light" onclick="toggleTeacherMode()">Mode Guru</button>
+      <button id="btnTeacherMode" type="button" class="btn-light" onclick="toggleTeacherMode()">Arsip Latihan</button>
     </div>
   </header>
 
@@ -401,7 +401,7 @@
     <section id="loginSection" class="card">
       <h2 style="margin-top:0;">Identitas Peserta Ujian</h2>
       <p style="margin:0;color:var(--muted);">
-        Isi data diri di bawah ini sebelum memulai ujian. Waktu pengerjaan adalah <strong>75 menit</strong> (17 soal). Selama ujian berlangsung, perpindahan tab/layar akan tercatat pada sistem pengawasan guru.
+        Isi data diri di bawah ini sebelum memulai latihan soal. Waktu pengerjaan adalah <strong>75 menit</strong> (17 soal). Selama ujian berlangsung, perpindahan tab/layar akan tercatat pada sistem pengawasan guru.
       </p>
       <div class="form-grid">
         <div>
@@ -454,7 +454,7 @@
 
     <!-- HALAMAN HASIL (HANYA NILAI, WAKTU, SOAL TERJAWAB, DAN PEMBAHASAN) -->
     <section id="resultSection" class="card hidden">
-      <h2 style="margin-top:0;">Hasil Ujian</h2>
+      <h2 style="margin-top:0;">Hasil Latihan Soal</h2>
       <div class="summary-grid">
         <div class="summary-box highlight">
           <div class="summary-label">Nilai</div>
@@ -477,7 +477,7 @@
     <!-- MODE GURU -->
     <section id="teacherSection" class="card hidden">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
-        <h2 style="margin:0;">Panel Guru &amp; Rekap Nilai</h2>
+        <h2>Arsip Latihan</h2>
         <button type="button" class="btn-light" onclick="exitTeacherMode()">Tutup Mode Guru</button>
       </div>
       <p class="notice">
@@ -666,9 +666,149 @@
       },
       {
         id: "PK4",
-        topik: "Asesmen 2 — Peluang Kejadian (Soal 4)",
+const QUESTIONS = [
+      {
+        id: "KP1",
+        topik: "Asesmen 2 - Kaidah Pencacahan (Soal 1)",
+        type: "short",
+        text: "Informasi berikut untuk menjawab soal nomor 1 dan 2.\nKota A, B, dan C berada di provinsi yang sama. Kota B berada di antara kota A dan kota C. Perjalanan dari kota A ke kota B dapat melewati 5 jalan. Perjalanan dari kota B ke kota C dapat melewati 3 jalan. Jalan di antara kota A, B, dan C diilustrasikan seperti berikut.\n\n1. Dio akan melakukan perjalanan pergi pulang dari kota A ke kota C melewati kota B. Banyak variasi jalan yang dapat dilewati Dio adalah ....",
+        answer: "225",
+        explanation: "Berangkat (A → B → C): 5 × 3 = 15 cara. Pulang (C → B → A): 3 × 5 = 15 cara. Total = 15 × 15 = 225."
+      },
+      {
+        id: "KP2",
+        topik: "Asesmen 2 - Kaidah Pencacahan (Soal 2)",
+        type: "short",
+        text: "Informasi berikut untuk menjawab soal nomor 1 dan 2.\nKota A, B, dan C berada di provinsi yang sama. Kota B berada di antara kota A dan kota C. Perjalanan dari kota A ke kota B dapat melewati 5 jalan. Perjalanan dari kota B ke kota C dapat melewati 3 jalan. Jalan di antara kota A, B, dan C diilustrasikan seperti berikut.\n\n2. Arga tinggal di kota C. Arga akan pergi ke kota A melalui kota B, lalu kembali lagi ke kota C. Jika saat pulang Arga tidak melalui jalan yang sama, berapa banyak variasi jalan yang dapat dilalui Arga?",
+        answer: "120",
+        explanation: "Berangkat (C → B → A): 3 × 5 = 15 cara. Pulang (A → B → C) tanpa jalan yang sama: 4 × 2 = 8 cara. Total = 15 × 8 = 120."
+      },
+      {
+        id: "KP3",
+        topik: "Asesmen 2 - Kaidah Pencacahan (Soal 3)",
         type: "tf_multi",
-        text: "Kejadian banjir di kota X, Y, dan Z saling bebas dengan P(X) = 2/3, P(Y) = 1/4, dan P(Z) = 1/2. Tentukan Benar atau Salah untuk setiap pernyataan berikut:",
+        text: "3. Bacalah bacaan berikut.\nVito, ayah, ibu, serta dua adiknya, Rina dan Rani akan makan malam bersama di sebuah restoran. Mereka duduk di kursi yang mengelilingi meja bundar. Banyak kursi yang ada di meja tersebut sama dengan banyak anggota keluarga Vito. Ada banyak cara mereka dapat duduk di kursi-kursi tersebut.\n\nPernyataan berikut yang benar terkait banyak cara duduk Vito dan keluarga adalah ... (Jawaban lebih dari satu)",
+        statements: [
+          { text: "Jika ayah dan ibu harus duduk berdampingan, ada 12 cara mereka duduk.", answer: "Benar" },
+          { text: "Jika Rani harus duduk di antara ayah dan ibu, ada 24 cara mereka duduk.", answer: "Salah" },
+          { text: "Jika Vito harus duduk di antara Rina dan Rani, ada 4 cara mereka duduk.", answer: "Benar" },
+          { text: "Jika Vito harus duduk di dekat ayah dan Rina harus duduk di dekat ibu, ada 4 cara mereka duduk.", answer: "Salah" },
+          { text: "Jika Vito dan kedua adiknya harus duduk berdampingan, ada 12 cara mereka duduk.", answer: "Benar" }
+        ],
+        explanation: "Periksa setiap pernyataan berdasarkan aturan permutasi siklis pada meja bundar."
+      },
+      {
+        id: "KP4A",
+        topik: "Asesmen 2 - Kaidah Pencacahan (Soal 4a)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 4 dan 5.\nSebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n4. Pasangkan ketentuan dengan banyak password yang dapat disusun.\n\nAngka harus ganjil dan huruf harus konsonan.",
+        options: ["86.400", "75.600", "32.400", "151.200", "34.600"],
+        answer: 2,
+        explanation: "Banyak susunan untuk ketentuan 'Angka harus ganjil dan huruf harus konsonan' adalah 32.400."
+      },
+      {
+        id: "KP4B",
+        topik: "Asesmen 2 - Kaidah Pencacahan (Soal 4b)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 4 dan 5.\nSebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n4. Pasangkan ketentuan dengan banyak password yang dapat disusun.\n\nTanpa ketentuan angka dan huruf yang dipilih.",
+        options: ["86.400", "75.600", "32.400", "151.200", "34.600"],
+        answer: 3,
+        explanation: "Banyak susunan untuk ketentuan 'Tanpa ketentuan angka dan huruf yang dipilih' adalah 151.200."
+      },
+      {
+        id: "KP4C",
+        topik: "Asesmen 2 - Kaidah Pencacahan (Soal 4c)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 4 dan 5.\nSebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n4. Pasangkan ketentuan dengan banyak password yang dapat disusun.\n\nHarus terdapat huruf vokal.",
+        options: ["86.400", "75.600", "32.400", "151.200", "34.600"],
+        answer: 0,
+        explanation: "Banyak susunan untuk ketentuan 'Harus terdapat huruf vokal' adalah 86.400."
+      },
+      {
+        id: "KP4D",
+        topik: "Asesmen 2 - Kaidah Pencacahan (Soal 4d)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 4 dan 5.\nSebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n4. Pasangkan ketentuan dengan banyak password yang dapat disusun.\n\nHarus terdapat angka genap.",
+        options: ["86.400", "75.600", "32.400", "151.200", "34.600"],
+        answer: 1,
+        explanation: "Banyak susunan untuk ketentuan 'Harus terdapat angka genap' adalah 75.600."
+      },
+      {
+        id: "KP5",
+        topik: "Asesmen 2 - Kaidah Pencacahan (Soal 5)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 4 dan 5.\nSebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n\n5. Jika password diawali dengan huruf v, banyak password yang dapat disusun ada ....",
+        options: ["86.400", "43.200", "32.400", "14.400", "12.200"],
+        answer: 1,
+        explanation: "Jika password diawali dengan huruf v, banyak password yang dapat disusun adalah 43.200."
+      },
+      {
+        id: "PK1",
+        topik: "Asesmen 2 - Peluang Kejadian (Soal 1)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 1–3.\nBermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau. Tasya mengambil sebuah bola dari kotak tersebut secara acak.\n\n1. Peluang Tasya mengambil bola biru atau hijau adalah ....",
+        options: ["1/20", "1/10", "1/5", "1/4", "1/2"],
+        answer: 4,
+        explanation: "Banyak bola hijau = 20 - (7 + 4 + 6) = 3. Peluang terambil bola biru atau hijau = (7 + 3)/20 = 10/20 = 1/2."
+      },
+      {
+        id: "PK2A",
+        topik: "Asesmen 2 - Peluang Kejadian (Soal 2a)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 1–3.\nBermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n2. Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil keduanya bola biru.",
+        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
+        answer: 5,
+        explanation: "Peluang terambil keduanya bola biru adalah 21/190."
+      },
+      {
+        id: "PK2B",
+        topik: "Asesmen 2 - Peluang Kejadian (Soal 2b)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 1–3.\nBermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n2. Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil keduanya bola merah.",
+        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
+        answer: 2,
+        explanation: "Pasangan yang sesuai pada soal adalah 2/95."
+      },
+      {
+        id: "PK2C",
+        topik: "Asesmen 2 - Peluang Kejadian (Soal 2c)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 1–3.\nBermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n2. Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil keduanya bola kuning.",
+        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
+        answer: 1,
+        explanation: "Peluang terambil keduanya bola kuning adalah 15/190 = 3/38."
+      },
+      {
+        id: "PK2D",
+        topik: "Asesmen 2 - Peluang Kejadian (Soal 2d)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 1–3.\nBermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n2. Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil bola merah dan bola hijau.",
+        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
+        answer: 6,
+        explanation: "Pasangan yang sesuai pada soal adalah 9/200."
+      },
+      {
+        id: "PK2E",
+        topik: "Asesmen 2 - Peluang Kejadian (Soal 2e)",
+        type: "mc",
+        text: "Informasi berikut untuk menjawab soal nomor 1–3.\nBermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n2. Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil bola kuning dan bola hijau.",
+        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
+        answer: 4,
+        explanation: "Pasangan yang sesuai pada soal adalah 7/190."
+      },
+      {
+        id: "PK3",
+        topik: "Asesmen 2 - Peluang Kejadian (Soal 3)",
+        type: "short",
+        text: "Informasi berikut untuk menjawab soal nomor 1–3.\nBermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n\n3. Tasya akan mengambil tiga bola sekaligus secara acak. Tentukan peluang terambil ketiganya bola kuning.",
+        answer: "1/57",
+        explanation: "C(6,3) / C(20,3) = 20 / 1.140 = 1/57."
+      },
+      {
+        id: "PK4",
+        topik: "Asesmen 2 - Peluang Kejadian (Soal 4)",
+        type: "tf_multi",
+        text: "Informasi berikut untuk menjawab soal nomor 4 dan 5.\nPerkiraan Terjadinya Banjir\nSeorang ahli geologi mengatakan bahwa dalam lima tahun ke depan, di beberapa kota akan terjadi banjir. Besar peluang di kota X terjadi banjir yaitu 2/3. Besar peluang di kota Y terjadi banjir yaitu 1/4. Besar peluang di kota Z terjadi banjir yaitu 1/2.\n\n4. Berilah tanda centang (✓) pada kolom Benar atau Salah untuk pernyataan-pernyataan berikut.",
         statements: [
           { text: "Peluang di kota X dan kota Y terjadi banjir sebesar 1/6.", answer: "Benar" },
           { text: "Peluang di kota X dan kota Z terjadi banjir sebesar 1/4.", answer: "Salah" },
@@ -676,18 +816,18 @@
           { text: "Peluang di kota X dan kota Y terjadi banjir lebih kecil daripada kota X dan kota Z.", answer: "Benar" },
           { text: "Peluang di kota X dan kota Z terjadi banjir lebih besar daripada kota Y dan kota Z.", answer: "Benar" }
         ],
-        explanation: "P(X∩Y) = 2/3 × 1/4 = 1/6 (Benar). P(X∩Z) = 2/3 × 1/2 = 1/3, bukan 1/4 (Salah). P(Y∩Z) = 1/4 × 1/2 = 1/8 (Benar). Karena 1/6 < 1/3 (Benar) dan 1/3 > 1/8 (Benar)."
+        explanation: "P(X∩Y) = 1/6 (Benar); P(X∩Z) = 1/3 ≠ 1/4 (Salah); P(Y∩Z) = 1/8 (Benar); 1/6 < 1/3 (Benar); 1/3 > 1/8 (Benar)."
       },
       {
         id: "PK5",
-        topik: "Asesmen 2 — Peluang Kejadian (Soal 5)",
+        topik: "Asesmen 2 - Peluang Kejadian (Soal 5)",
         type: "short",
-        text: "Kejadian banjir di kota X, Y, dan Z saling bebas dengan P(X) = 2/3, P(Y) = 1/4, dan P(Z) = 1/2. Tentukan peluang ketiga kota terjadi banjir secara bersamaan! (Tulis dalam bentuk pecahan seperti 1/12)",
+        text: "Informasi berikut untuk menjawab soal nomor 4 dan 5.\nPerkiraan Terjadinya Banjir\nSeorang ahli geologi mengatakan bahwa dalam lima tahun ke depan, di beberapa kota akan terjadi banjir. Besar peluang di kota X terjadi banjir yaitu 2/3. Besar peluang di kota Y terjadi banjir yaitu 1/4. Besar peluang di kota Z terjadi banjir yaitu 1/2.\n\n5. Peluang ketiga kota tersebut terjadi banjir sebesar ....",
         answer: "1/12",
-        explanation: "P(X ∩ Y ∩ Z) = P(X) × P(Y) × P(Z) = (2/3) × (1/4) × (1/2) = 2/24 = 1/12."
+        explanation: "P(X∩Y∩Z) = 2/3 × 1/4 × 1/2 = 2/24 = 1/12."
       }
     ];
-
+    
     let currentIdx = 0;
     let userAnswers = {};
     let doubtFlags = {};
@@ -864,7 +1004,7 @@
       if (q.type === "mc") {
         const list = document.createElement("div");
         list.className = "option-list";
-        const labels = ["A", "B", "C", "D", "E"];
+        const labels = ["A", "B", "C", "D", "E", "F", "G"];
         q.options.forEach((opt, idx) => {
           const item = document.createElement("label");
           item.className = "option-item";
@@ -960,7 +1100,7 @@
       } else if (doubtCount > 0) {
         extra = `Masih ada ${doubtCount} soal yang ditandai ragu-ragu. `;
       }
-      if (confirm(`${extra}Yakin ingin menyelesaikan dan mengirim jawaban ujian?`)) {
+      if (confirm(`${extra}Yakin ingin menyelesaikan dan mengirim jawaban latihan soal ini?`)) {
         submitExam(false);
       }
     }
@@ -1010,7 +1150,7 @@
       let totalFraction = 0;
       const reviewContainer = document.getElementById("reviewContainer");
       reviewContainer.innerHTML = "";
-      const labels = ["A", "B", "C", "D", "E"];
+      const labels = ["A", "B", "C", "D", "E", "F", "G"];
 
       QUESTIONS.forEach((q, idx) => {
         const res = scoreQuestion(q);
@@ -1151,7 +1291,7 @@
     }
 
     function toggleTeacherMode() {
-      const pin = prompt("Masukkan PIN Mode Guru:");
+      const pin = prompt("Masukkan PIN Arsip Latihan:");
       if (pin === null) return;
       if (pin !== TEACHER_PIN) {
         alert("PIN salah.");
