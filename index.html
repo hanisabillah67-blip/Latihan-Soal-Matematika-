@@ -559,41 +559,61 @@
         explanation: "Periksa setiap pernyataan berdasarkan aturan permutasi siklis pada meja bundar."
       },
       {
-        id: "KP4A",
-        topik: "",
-        type: "mc",
-        text: "Sebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n\nBanyak password yang dapat disusun jika angka harus ganjil dan huruf harus konsonan.",
-        options: ["86.400", "75.600", "32.400", "151.200", "34.600"],
-        answer: 2,
-        explanation: "Banyak susunan untuk ketentuan 'Angka harus ganjil dan huruf harus konsonan' adalah 32.400."
-      },
-      {
-        id: "KP4B",
-        topik: "",
-        type: "mc",
-        text: "Sebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n\nBanyak password yang dapat disusun jika tanpa ketentuan angka dan huruf yang dipilih.",
-        options: ["86.400", "75.600", "32.400", "151.200", "34.600"],
-        answer: 3,
-        explanation: "Banyak susunan untuk ketentuan 'Tanpa ketentuan angka dan huruf yang dipilih' adalah 151.200."
-      },
-      {
-        id: "KP4C",
-        topik: "",
-        type: "mc",
-        text: "Sebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n\nBanyak password yang dapat disusun jika harus terdapat huruf vokal.",
-        options: ["86.400", "75.600", "32.400", "151.200", "34.600"],
-        answer: 0,
-        explanation: "Banyak susunan untuk ketentuan 'Harus terdapat huruf vokal' adalah 86.400."
-      },
-      {
-        id: "KP4D",
-        topik: "",
-        type: "mc",
-        text: "Sebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n\nBanyak password yang dapat disusun jika harus terdapat angka genap.",
-        options: ["86.400", "75.600", "32.400", "151.200", "34.600"],
-        answer: 1,
-        explanation: "Banyak susunan untuk ketentuan 'Harus terdapat angka genap' adalah 75.600."
-      },
+      id: "KP4A",
+      topik: "",
+      type: "matching",
+      text: "Sebuah ruang rahasia memiliki password yang terdiri atas 4 huruf dan 2 angka untuk membuka pintu ruangan. Untuk membuat password pintu tersebut disediakan pilihan sebagai berikut.\n1. Angka prima kurang dari 10.\n2. Huruf b, c, r, s, t, a, dan v.\n\nPasangkan ketentuan dengan banyak password yang dapat disusun.",
+      pairs: [
+        { id: "p1", left: "Angka harus ganjil dan huruf harus konsonan.", right: "32.400" },
+        { id: "p2", left: "Tanpa ketentuan angka dan huruf yang dipilih.", right: "151.200" },
+        { id: "p3", left: "Harus terdapat huruf vokal.", right: "86.400" },
+        { id: "p4", left: "Harus terdapat angka genap.", right: "75.600" }
+      ],
+      distractors: ["34.600"],
+      explanation: "Banyak susunan password dihitung berdasarkan aturan pencacahan/permutasi sesuai syarat huruf dan angka."
+    },
+    {
+      id: "KP4B",
+      topik: "",
+      type: "matching",
+      text: "Pasangkan ketentuan berikut dengan banyak password yang dapat disusun.",
+      pairs: [
+        { id: "p1", left: "Ketentuan 1", right: "86.400" },
+        { id: "p2", left: "Ketentuan 2", right: "75.600" },
+        { id: "p3", left: "Ketentuan 3", right: "32.400" },
+        { id: "p4", left: "Ketentuan 4", right: "151.200" }
+      ],
+      distractors: ["34.600"],
+      explanation: "Pembahasan soal kelima."
+    },
+    {
+      id: "KP4C",
+      topik: "",
+      type: "matching",
+      text: "Pasangkan pernyataan berikut dengan hasil yang sesuai.",
+      pairs: [
+        { id: "p1", left: "Pernyataan 1", right: "86.400" },
+        { id: "p2", left: "Pernyataan 2", right: "75.600" },
+        { id: "p3", left: "Pernyataan 3", right: "32.400" },
+        { id: "p4", left: "Pernyataan 4", right: "151.200" }
+      ],
+      distractors: ["34.600"],
+      explanation: "Pembahasan soal keenam."
+    },
+    {
+      id: "KP4D",
+      topik: "",
+      type: "matching",
+      text: "Pasangkan pernyataan berikut dengan hasil yang sesuai.",
+      pairs: [
+        { id: "p1", left: "Pernyataan 1", right: "86.400" },
+        { id: "p2", left: "Pernyataan 2", right: "75.600" },
+        { id: "p3", left: "Pernyataan 3", right: "32.400" },
+        { id: "p4", left: "Pernyataan 4", right: "151.200" }
+      ],
+      distractors: ["34.600"],
+      explanation: "Pembahasan soal ketujuh."
+    },
       {
         id: "KP5",
         topik: "",
@@ -815,6 +835,10 @@
         if (!Array.isArray(ans)) return false;
         return q.statements.every((_, idx) => ans[idx] === "Benar" || ans[idx] === "Salah");
       }
+      if (q.type === "matching") {
+      if (!ans || typeof ans !== "object") return false;
+      return q.pairs.some((p) => Boolean(ans[p.id]));
+      }
       return false;
     }
 
@@ -971,6 +995,156 @@ if (q.image && q.text.includes(marker)) {
           wrap.appendChild(row);
         });
         body.appendChild(wrap);
+        } else if (q.type === "matching") {
+      if (!userAnswers[q.id] || typeof userAnswers[q.id] !== "object") {
+        userAnswers[q.id] = {};
+      }
+      const currentMap = userAnswers[q.id];
+
+      const allCards = [
+        ...q.pairs.map((p) => p.right),
+        ...(q.distractors || [])
+      ];
+      const usedValues = Object.values(currentMap);
+      const availableCards = allCards.filter((val) => !usedValues.includes(val));
+
+      let draggedValue = null;
+      let selectedValue = null;
+
+      const wrapper = document.createElement("div");
+      wrapper.style.display = "flex";
+      wrapper.style.flexDirection = "column";
+      wrapper.style.gap = "14px";
+
+      const bankBox = document.createElement("div");
+      bankBox.style.padding = "12px";
+      bankBox.style.border = "1px dashed #94a3b8";
+      bankBox.style.borderRadius = "8px";
+      bankBox.style.background = "#f8fafc";
+
+      const bankTitle = document.createElement("div");
+      bankTitle.textContent = "Pilihan jawaban (seret atau ketuk lalu pilih kotak tujuan):";
+      bankTitle.style.fontSize = "13px";
+      bankTitle.style.fontWeight = "600";
+      bankTitle.style.marginBottom = "8px";
+      bankTitle.style.color = "#334155";
+      bankBox.appendChild(bankTitle);
+
+      const bankChips = document.createElement("div");
+      bankChips.style.display = "flex";
+      bankChips.style.flexWrap = "wrap";
+      bankChips.style.gap = "8px";
+        
+        availableCards.forEach((val) => {
+        const chip = document.createElement("div");
+        chip.textContent = val;
+        chip.draggable = true;
+        chip.style.padding = "8px 12px";
+        chip.style.borderRadius = "6px";
+        chip.style.border = "1px solid #2563eb";
+        chip.style.background = selectedValue === val ? "#dbeafe" : "#ffffff";
+        chip.style.color = "#0f172a";
+        chip.style.fontWeight = "500";
+        chip.style.cursor = "grab";
+        chip.style.userSelect = "none";
+
+        chip.addEventListener("dragstart", (e) => {
+          draggedValue = val;
+          e.dataTransfer.setData("text/plain", val);
+        });
+
+        chip.addEventListener("click", () => {
+          selectedValue = selectedValue === val ? null : val;
+          renderQuestion();
+        });
+
+        bankChips.appendChild(chip);
+      });
+
+      if (availableCards.length === 0) {
+        const emptyMsg = document.createElement("span");
+        emptyMsg.textContent = "Semua pilihan sudah dipasangkan (ketuk pilihan di kotak kanan untuk melepas).";
+        emptyMsg.style.fontSize = "13px";
+        emptyMsg.style.color = "#64748b";
+        bankChips.appendChild(emptyMsg);
+      }
+
+      bankBox.appendChild(bankChips);
+      wrapper.appendChild(bankBox);
+
+      q.pairs.forEach((pair) => {
+        const row = document.createElement("div");
+        row.style.display = "flex";
+        row.style.flexWrap = "wrap";
+        row.style.alignItems = "center";
+        row.style.justifyContent = "space-between";
+        row.style.gap = "10px";
+        row.style.padding = "10px 12px";
+        row.style.border = "1px solid #cbd5e1";
+        row.style.borderRadius = "8px";
+        row.style.background = "#ffffff";
+
+        const leftText = document.createElement("div");
+        leftText.textContent = pair.left;
+        leftText.style.flex = "1 1 240px";
+        leftText.style.fontWeight = "500";
+
+        const dropZone = document.createElement("div");
+        dropZone.style.minWidth = "140px";
+        dropZone.style.minHeight = "38px";
+        dropZone.style.padding = "6px 12px";
+        dropZone.style.borderRadius = "6px";
+        dropZone.style.border = "2px dashed #64748b";
+        dropZone.style.display = "flex";
+        dropZone.style.alignItems = "center";
+        dropZone.style.justifyContent = "center";
+        dropZone.style.background = currentMap[pair.id] ? "#eff6ff" : "#f1f5f9";
+        dropZone.style.cursor = "pointer";
+
+        dropZone.textContent = currentMap[pair.id]
+          ? `${currentMap[pair.id]}  ✕`
+          : "Lepas di sini";
+
+        dropZone.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          dropZone.style.borderColor = "#2563eb";
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+          dropZone.style.borderColor = "#64748b";
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+          e.preventDefault();
+          const val = e.dataTransfer.getData("text/plain") || draggedValue;
+          if (val) {
+            currentMap[pair.id] = val;
+            userAnswers[q.id] = currentMap;
+            draggedValue = null;
+            selectedValue = null;
+            renderQuestion();
+          }
+        });
+
+        dropZone.addEventListener("click", () => {
+          if (selectedValue) {
+            currentMap[pair.id] = selectedValue;
+            userAnswers[q.id] = currentMap;
+            selectedValue = null;
+            renderQuestion();
+          } else if (currentMap[pair.id]) {
+            delete currentMap[pair.id];
+            userAnswers[q.id] = currentMap;
+            renderQuestion();
+          }
+        });
+
+        row.appendChild(leftText);
+        row.appendChild(dropZone);
+        wrapper.appendChild(row);
+      });
+
+      body.appendChild(wrapper);
       }
 
       document.getElementById("btnPrev").disabled = currentIdx === 0;
@@ -1033,6 +1207,19 @@ if (q.image && q.text.includes(marker)) {
           fraction: total > 0 ? right / total : 0,
           subScoreText: `${right}/${total} pernyataan tepat`
         };
+      }
+      if (q.type === "matching") {
+      const mapObj = ans && typeof ans === "object" ? ans : {};
+      let right = 0;
+      q.pairs.forEach((p) => {
+        if (mapObj[p.id] === p.right) right++;
+      });
+      const total = q.pairs.length;
+      return {
+        isCorrect: right === total,
+        fraction: total > 0 ? right / total : 0,
+        subScoreText: `${right}/${total} pasangan tepat`
+      };
       }
       return { isCorrect: false, fraction: 0 };
     }
