@@ -530,6 +530,7 @@
         id: "KP1",
         topik: "Asesmen 2 - Kaidah Pencacahan (Soal 1)",
         type: "short",
+        image: "IMG-20261122-WA0028~3.jpg",
         text: "Informasi berikut untuk menjawab soal nomor 1 dan 2.\nKota A, B, dan C berada di provinsi yang sama. Kota B berada di antara kota A dan kota C. Perjalanan dari kota A ke kota B dapat melewati 5 jalan. Perjalanan dari kota B ke kota C dapat melewati 3 jalan. Jalan di antara kota A, B, dan C diilustrasikan seperti berikut.\n\n1. Dio akan melakukan perjalanan pergi pulang dari kota A ke kota C melewati kota B. Banyak variasi jalan yang dapat dilewati Dio adalah ....",
         answer: "225",
         explanation: "Berangkat (A → B → C): 5 × 3 = 15 cara. Pulang (C → B → A): 3 × 5 = 15 cara. Total = 15 × 15 = 225."
@@ -538,6 +539,7 @@
         id: "KP2",
         topik: "Asesmen 2 - Kaidah Pencacahan (Soal 2)",
         type: "short",
+        image: "IMG-20261122-WA0028~3.jpg",
         text: "Informasi berikut untuk menjawab soal nomor 1 dan 2.\nKota A, B, dan C berada di provinsi yang sama. Kota B berada di antara kota A dan kota C. Perjalanan dari kota A ke kota B dapat melewati 5 jalan. Perjalanan dari kota B ke kota C dapat melewati 3 jalan. Jalan di antara kota A, B, dan C diilustrasikan seperti berikut.\n\n2. Arga tinggal di kota C. Arga akan pergi ke kota A melalui kota B, lalu kembali lagi ke kota C. Jika saat pulang Arga tidak melalui jalan yang sama, berapa banyak variasi jalan yang dapat dilalui Arga?",
         answer: "120",
         explanation: "Berangkat (C → B → A): 3 × 5 = 15 cara. Pulang (A → B → C) tanpa jalan yang sama: 4 × 2 = 8 cara. Total = 15 × 8 = 120."
@@ -859,7 +861,17 @@
 
       const body = document.getElementById("questionBody");
       body.innerHTML = "";
-
+if (q.image) {
+      const imgEl = document.createElement("img");
+      imgEl.src = q.image;
+      imgEl.alt = "Ilustrasi jalan antara kota A, B, dan C";
+      imgEl.style.maxWidth = "100%";
+      imgEl.style.height = "auto";
+      imgEl.style.borderRadius = "8px";
+      imgEl.style.marginBottom = "12px";
+      imgEl.style.border = "1px solid #e2e8f0";
+      body.appendChild(imgEl);
+        }
       if (q.type === "mc") { 
         const list = document.createElement("div");
         list.className = "option-list";
