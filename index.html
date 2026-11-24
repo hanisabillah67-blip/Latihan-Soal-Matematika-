@@ -590,51 +590,21 @@
         answer: 4,
         explanation: "Banyak bola hijau = 20 - (7 + 4 + 6) = 3. Peluang terambil bola biru atau hijau = (7 + 3)/20 = 10/20 = 1/2."
       },
-      {
-        id: "PK2A",
-        topik: "",
-        type: "mc",
-        text: "Bermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil keduanya bola biru.",
-        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
-        answer: 5,
-        explanation: "Peluang terambil keduanya bola biru adalah 21/190."
-      },
-      {
-        id: "PK2B",
-        topik: "",
-        type: "mc",
-        text: "Bermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil keduanya bola merah.",
-        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
-        answer: 2,
-        explanation: "Pasangan yang sesuai pada soal adalah 2/95."
-      },
-      {
-        id: "PK2C",
-        topik: "",
-        type: "mc",
-        text: "Bermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil keduanya bola kuning.",
-        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
-        answer: 1,
-        explanation: "Peluang terambil keduanya bola kuning adalah 15/190 = 3/38."
-      },
-      {
-        id: "PK2D",
-        topik: "",
-        type: "mc",
-        text: "Bermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil bola merah dan bola hijau.",
-        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
-        answer: 6,
-        explanation: "Pasangan yang sesuai pada soal adalah 9/200."
-      },
-      {
-        id: "PK2E",
-        topik: "",
-        type: "mc",
-        text: "Bermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau.\n Tasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan menarik garis lurus antara bagian kiri dan bagian kanan yang sesuai.\n\nPeluang terambil bola kuning dan bola hijau.",
-        options: ["1/38", "3/38", "2/95", "3/100", "7/190", "21/190", "9/200"],
-        answer: 4,
-        explanation: "Pasangan yang sesuai pada soal adalah 7/190."
-      },
+  {
+      id: "PK2",
+      topik: "",
+      type: "matching",
+      text: "Bermain Bola Warna\nTasya memasukkan 20 bola berbagai warna ke dalam kotak. Tasya memasukkan 7 bola biru, 4 bola merah, 6 bola kuning, dan sisanya bola hijau. Tasya mengambil sebuah bola dari kotak tersebut secara acak.\n\nTasya akan mengambil dua bola sekaligus secara acak. Tentukan peluang terambil dua bola dengan memasangkan bagian kiri dan bagian kanan yang sesuai.",
+      pairs: [
+        { id: "p1", left: "Peluang terambil keduanya bola biru.", right: "21/190" },
+        { id: "p2", left: "Peluang terambil keduanya bola merah.", right: "2/95" },
+        { id: "p3", left: "Peluang terambil keduanya bola kuning.", right: "3/38" },
+        { id: "p4", left: "Peluang terambil bola merah dan bola hijau.", right: "9/200" },
+        { id: "p5", left: "Peluang terambil bola kuning dan bola hijau.", right: "7/190" }
+      ],
+      distractors: ["1/38", "3/100"],
+      explanation: "Total bola = 20 (7 biru, 4 merah, 6 kuning, dan 3 hijau). Banyak cara mengambil 2 bola dari 20 bola adalah C(20, 2) = 190."
+    },
       {
         id: "PK3",
         topik: "",
