@@ -857,21 +857,52 @@
       const q = QUESTIONS[currentIdx];
       document.getElementById("qTopic").textContent = q.topik;
       document.getElementById("qProgress").textContent = `Soal ${currentIdx + 1} dari ${QUESTIONS.length}`;
-      document.getElementById("questionText").textContent = q.text;
-
+  
       const body = document.getElementById("questionBody");
       body.innerHTML = "";
-if (q.image) {
-      const imgEl = document.createElement("img");
-      imgEl.src = q.image;
-      imgEl.alt = "Ilustrasi jalan antara kota A, B, dan C";
-      imgEl.style.maxWidth = "100%";
-      imgEl.style.height = "auto";
-      imgEl.style.borderRadius = "8px";
-      imgEl.style.marginBottom = "12px";
-      imgEl.style.border = "1px solid #e2e8f0";
-      body.appendChild(imgEl);
-        }
+const qTextEl = document.getElementById("questionText");
+const marker = "Jalan di antara kota A, B, dan C diilustrasikan seperti berikut.";
+
+if (q.image && q.text.includes(marker)) {
+  const parts = q.text.split(marker);
+  qTextEl.innerHTML = "";
+
+  const beforeEl = document.createElement("div");
+  beforeEl.textContent = parts[0] + marker;
+  beforeEl.style.whiteSpace = "pre-line";
+  beforeEl.style.marginBottom = "12px";
+  qTextEl.appendChild(beforeEl);
+
+  const imgEl = document.createElement("img");
+  imgEl.src = q.image;
+  imgEl.alt = "Ilustrasi jalan antara kota A, B, dan C";
+  imgEl.style.display = "block";
+  imgEl.style.maxWidth = "100%";
+  imgEl.style.height = "auto";
+  imgEl.style.borderRadius = "8px";
+  imgEl.style.marginBottom = "12px";
+  imgEl.style.border = "1px solid #e2e8f0";
+  qTextEl.appendChild(imgEl);
+
+  const afterEl = document.createElement("div");
+  afterEl.textContent = parts.slice(1).join(marker).trimStart();
+  afterEl.style.whiteSpace = "pre-line";
+  qTextEl.appendChild(afterEl);
+} else {
+  qTextEl.textContent = q.text;
+  if (q.image) {
+    const imgEl = document.createElement("img");
+    imgEl.src = q.image;
+    imgEl.alt = "Ilustrasi jalan antara kota A, B, dan C";
+    imgEl.style.display = "block";
+    imgEl.style.maxWidth = "100%";
+    imgEl.style.height = "auto";
+    imgEl.style.borderRadius = "8px";
+    imgEl.style.marginBottom = "12px";
+    imgEl.style.border = "1px solid #e2e8f0";
+    body.appendChild(imgEl);
+  }
+    }
       if (q.type === "mc") { 
         const list = document.createElement("div");
         list.className = "option-list";
